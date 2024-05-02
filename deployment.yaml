@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-reservation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-reservation
+  template:
+    metadata:
+      labels:
+        app: ticket-reservation
+    spec:
+      containers:
+      - name: ticket-reservation-service
+        image: ticketreservationregistry.azurecr.io/ticket-reservation-service:latest
+        ports:
+        - containerPort: 4000
+      imagePullSecrets:
+      - name: acr-auth
